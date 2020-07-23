@@ -1,0 +1,38 @@
+<div class="mt-5 text-center">
+  <img
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQC_1R57IPlV2Hl2CjinhEaL2tcP5ljRnUjtQ&usqp=CAU"
+    class="img-fluid"
+    alt="Responsive image"
+  />
+</div>
+<div class="mt-5 pricing-header mx-auto">
+  <h3
+    class="display-4 font-title animate__animated animate__pulse text-center text-success"
+  >
+    Thời tiết Cần thơ
+  </h3>
+  <p class="text-center">
+    Thông tin thời tiết, dữ liệu được lấy từ Openweathermap
+  </p>
+  <div class="container">
+    <hr />
+    <h5>Vị trí địa lý :</h5>
+    <p>Kinh độ : {{ weatherData["coord"]["lon"] }}</p>
+    <p>Vĩ độ : {{ weatherData["coord"]["lat"] }}</p>
+    <hr />
+    <h5>Thời tiết:</h5>
+    <p>
+      Tổng quan : {{ weatherData["weather"][0]["description"] | titlecase }}
+    </p>
+    <p>
+      <b class="text-info">Nhiệt độ : {{ weatherData["main"]["temp"] }} độ</b>
+    </p>
+    <hr />
+    <p>Cảm nhận thực : {{ weatherData["main"]["feels_like"] }} độ</p>
+    <p>Nhiệt dộ cao nhất : {{ weatherData["main"]["temp_max"] }} độ</p>
+    <p>Nhiệt độ thấp nhất : {{ weatherData["main"]["temp_min"] }} độ</p>
+    <p>Áp suất : {{ weatherData["main"]["pressure"] }} hPa</p>
+    <p>Độ ẩm : {{ weatherData["main"]["humidity"] }}%</p>
+    <hr />
+  </div>
+</div>

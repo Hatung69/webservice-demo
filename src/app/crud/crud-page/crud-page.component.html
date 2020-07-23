@@ -1,0 +1,150 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 font-title animate__animated animate__pulse text-center">
+    Quản lý người dùng
+  </h1>
+  <h3 class="text-danger">Danh sách người dùng</h3>
+  <hr />
+  <a
+    routerLink="create-user"
+    type="button"
+    class="btn btn-success btn-lg rounded-pill"
+    style="background: rgb(7, 202, 7);"
+  >
+    <i class="fas fa-user-plus"></i> Thêm mới người dùng
+  </a>
+  <div class="input-group mt-4 container">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">Tìm kiếm</span>
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Nhập tên người dùng cần tìm..."
+      #value
+      (keyup)="searchUser($event)"
+    />
+  </div>
+</div>
+
+<div class="container">
+  <h4>Số người dùng : {{ listUser.length }}</h4>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mb-5">
+    <div class="col" *ngFor="let user of listUser; count as total">
+      <div class="card mt-4">
+        <img [src]="user.avatar" alt="Avatar" style="width: 100%;" />
+        <div class="container">
+          <h4 class="pt-2">
+            <b
+              ><a routerLink="user-detail/{{ user.id }}">{{ user.name }}</a></b
+            >
+          </h4>
+          <p>{{ user.email }}</p>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#modalUpdateUser"
+            (click)="loadUpdateUser(user.id)"
+          >
+            <i class="far fa-edit"></i> Sửa
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteUser(user.id)"
+          >
+            <i class="far fa-trash-alt"></i> Xoá
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Update User-->
+<div
+  class="modal fade"
+  id="modalUpdateUser"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" #modal id="exampleModalLabel">Sửa thông tin</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container mb-5">
+          <form [formGroup]="userForm">
+            <div class="form-group">
+              <label>Tên người dùng</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nhập vào tên người dùng"
+                formControlName="userName"
+                [(ngModel)]="userUpdate.name"
+              />
+            </div>
+            <div class="form-group">
+              <label>Địa chỉ email</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Nhập vào địa chỉ email"
+                formControlName="userEmail"
+                [(ngModel)]="userUpdate.email"
+              />
+            </div>
+            <div class="form-group">
+              <label>Số điện thoại</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nhập vào số điện thoại"
+                formControlName="userPhone"
+                [(ngModel)]="userUpdate.phone"
+              />
+            </div>
+            <div class="form-group">
+              <label>Link avatar</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nhập vào đường dẫn avatar"
+                formControlName="userAvatar"
+                [(ngModel)]="userUpdate.avatar"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Đóng
+        </button>
+        <button
+          data-dismiss="modal"
+          type="button"
+          class="btn btn-primary"
+          [disabled]="!userForm.valid"
+          (click)="updateUser(userForm)"
+        >
+          Lưu thay đổi
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

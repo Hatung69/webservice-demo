@@ -1,0 +1,153 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 font-title animate__animated animate__pulse text-center">
+    Quản lý người dùng
+  </h1>
+  <h3 class="text-danger">Chi tiết người dùng</h3>
+  <hr />
+</div>
+
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-9">
+      <h1 class="pt-2 text-center text-warning">
+        <b>{{ user.name }}</b>
+      </h1>
+      <hr />
+      <div class="container">
+        <h5 class="text-info">
+          <i class="fas fa-id-card-alt"></i> ID người dùng : {{ user.id }}
+        </h5>
+        <hr />
+        <h5 class="text-info">
+          <i class="fas fa-envelope-open-text"></i> Địa chỉ Email :
+          {{ user.email }}
+        </h5>
+        <hr />
+        <h5 class="text-info">
+          <i class="fas fa-phone"></i> Số điện thoại : {{ user.phone }}
+        </h5>
+        <hr />
+      </div>
+
+      <div
+        class="btn-group btn-lg btn-block"
+        role="group"
+        aria-label="Basic example"
+      >
+        <button type="button" class="btn btn-secondary" (click)="backClicked()">
+          <i class="fas fa-arrow-left"></i> Quay lại
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#modalUpdateUser"
+          (click)="loadUpdateUser(user.id)"
+        >
+          <i class="far fa-edit"></i> Sửa
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="deleteUser(user.id)"
+        >
+          <i class="far fa-trash-alt"></i> Xoá
+        </button>
+      </div>
+    </div>
+    <div class="col-3">
+      <img
+        class="img-fluid img-thumbnail mt-5"
+        [src]="user.avatar"
+        alt="Avatar"
+        style="width: 100%;"
+      />
+    </div>
+  </div>
+</div>
+
+<!-- Modal Update User-->
+<div
+  class="modal fade"
+  id="modalUpdateUser"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" #modal id="exampleModalLabel">Sửa thông tin</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container mb-5">
+          <form [formGroup]="userForm">
+            <div class="form-group">
+              <label>Tên người dùng</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nhập vào tên người dùng"
+                formControlName="userName"
+                [(ngModel)]="userUpdate.name"
+              />
+            </div>
+            <div class="form-group">
+              <label>Địa chỉ email</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Nhập vào địa chỉ email"
+                formControlName="userEmail"
+                [(ngModel)]="userUpdate.email"
+              />
+            </div>
+            <div class="form-group">
+              <label>Số điện thoại</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nhập vào số điện thoại"
+                formControlName="userPhone"
+                [(ngModel)]="userUpdate.phone"
+              />
+            </div>
+            <div class="form-group">
+              <label>Link avatar</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nhập vào đường dẫn avatar"
+                formControlName="userAvatar"
+                [(ngModel)]="userUpdate.avatar"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Đóng
+        </button>
+        <button
+          data-dismiss="modal"
+          type="button"
+          class="btn btn-primary"
+          [disabled]="!userForm.valid"
+          (click)="updateUser(userForm)"
+        >
+          Lưu thay đổi
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

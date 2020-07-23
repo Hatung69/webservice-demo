@@ -1,0 +1,40 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1
+    class="display-4 font-title animate__animated animate__pulse text-center text-info"
+  >
+    The movies
+  </h1>
+  <h3 class="text-danger">Các bộ phim phổ biến</h3>
+  <p>
+    Danh sách các bộ phim phổ biến, dữ liệu được lấy từ TMDB
+  </p>
+
+  <hr />
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-info" (click)="preLoadData()">
+      <i class="fas fa-backward"></i> Về trước
+    </button>
+    <button type="button" class="btn btn-danger" (click)="loaddata()">
+      Xem tiếp <i class="fas fa-forward"></i>
+    </button>
+  </div>
+  <hr />
+</div>
+
+<div class="container mb-5">
+  <div class="responsive pt-3" *ngFor="let movie of listMoviePopular">
+    <div class="gallery">
+      <img
+        src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
+        width="600"
+        height="400"
+      />
+      <div class="desc">
+        {{ movie.title }}
+        <p>Phát hành : {{ movie.release_date }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+</div>
